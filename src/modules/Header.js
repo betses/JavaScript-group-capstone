@@ -9,4 +9,4 @@ const header = () => {
 </ul>
     `;
 };
-export default header
+export default header;
