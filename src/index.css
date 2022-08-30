@@ -50,7 +50,6 @@ footer p {
 
 .card:hover {
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-
 }
 
 .title-container {
@@ -64,7 +63,6 @@ footer p {
 .like-icon {
     display: flex;
     gap: 10px;
-    
 }
 
 .title-container span {
@@ -79,7 +77,6 @@ footer p {
     cursor: pointer;
 }
 
-
 #isDisabled {
     display: none;
     color: red;
@@ -91,7 +88,6 @@ footer p {
     position: relative;
     width: 100%;
 }
-
 
 .image {
     opacity: 1;
@@ -112,10 +108,6 @@ footer p {
     transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
     text-align: center;
-}
-
-.container:hover .image {
-    opacity: 0.3;
 }
 
 .container:hover .image {

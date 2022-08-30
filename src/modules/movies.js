@@ -1,3 +1,5 @@
+import addItem from './add.js';
+
 class Movies {
   constructor() {
     this.likes = [];
@@ -23,6 +25,8 @@ class Movies {
     const div = document.querySelector('.grid-container');
     const response = await this.getMovie();
     for (let movies = 1; movies <= 20; movies += 1) {
+      const count = 0;
+      const movieNumber = addItem(count, movies);
       const card = document.createElement('div');
       card.classList.add('card');
       const movie = response[movies];
@@ -37,7 +41,7 @@ class Movies {
         </div>
       </div>
       <div class="title-container">
-        <h4><b>${movie.name}</b></h4> 
+        <h4><b>${movie.name} ${movieNumber}</b></h4> 
         <div class="like-icon"> <i class="fa fa-heart" data-pos=${movie.id}></i> <span id="movie-id"> ${msgLikes} </span> Like(s)</div>
       </div>
       `;
