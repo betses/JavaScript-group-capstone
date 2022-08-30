@@ -64,19 +64,19 @@ footer p {
 .like-icon {
     display: flex;
     gap: 10px;
-    cursor: pointer;
+    
 }
 
 .title-container span {
     display: flex;
     flex-direction: column;
     gap: 5px;
-    cursor: pointer;
 }
 
 .fa-heart {
     display: flex;
     justify-content: center;
+    cursor: pointer;
 }
 
 
