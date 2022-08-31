@@ -12,8 +12,8 @@
   "extends": ["airbnb-base"],
   "rules": {
     "no-shadow": "off",
-    "singlequote": "off",
     "no-param-reassign": "off",
+    "quotes": "off",
     "no-const-assign": "off",
     "no-undef": "off",
     "eol-last": "off",

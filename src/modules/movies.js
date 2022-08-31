@@ -15,9 +15,7 @@ class Movies {
   };
 
   getLikes = async () => {
-    const likedList = await fetch(
-      "https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/g47Ybpe3Iv9MLdD87d0m/likes"
-    ).then((response) => response.json());
+    const likedList = await fetch("https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/g47Ybpe3Iv9MLdD87d0m/likes").then((response) => response.json());
     this.likes = likedList;
   };
 
@@ -32,8 +30,6 @@ class Movies {
     const response = await this.getMovie();
     let count = 0;
     for (let movies = 1; movies <= 20; movies += 1) {
-      const count = 0;
-      const movieNumber = addItem(count, movies);
       const card = document.createElement("div");
       card.classList.add("card");
       const movie = response[movies];
@@ -67,7 +63,7 @@ class Movies {
           btn.disabled = true;
           btn.style.color = "red";
         },
-        { once: true }
+        { once: true },
       );
     });
     const comments = document.querySelectorAll(".btn");
@@ -91,7 +87,7 @@ class Movies {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ item_id: itemId }),
-      }
+      },
     )
       .then((response) => response.text(response))
       .then((json) => json);
@@ -145,12 +141,10 @@ class Movies {
       body.removeChild(body.lastChild);
       main.style.filter = "blur(0)";
     });
-    const url =
-      "https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/g47Ybpe3Iv9MLdD87d0m/comments";
+    const url = "https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/g47Ybpe3Iv9MLdD87d0m/comments";
     const url2 = `https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/g47Ybpe3Iv9MLdD87d0m/comments?item_id=${response.id}`;
     const commentss = document.getElementById("show");
     const dataa = await fetch(url2).then((response) => response.json());
-    console.log(dataa);
     if (dataa.length > 0) {
       dataa.map((data) => {
         const div = document.createElement("div");
