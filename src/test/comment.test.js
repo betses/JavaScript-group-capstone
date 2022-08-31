@@ -3,16 +3,16 @@ import Movies from '../modules/movies.js';
 global.fetch = jest.fn(() => Promise.resolve({
   json: () => Promise.resolve(
     [
-        {
-            "username": "hamid",
-            "creation_date": "2022-08-31",
-            "comment": "sas"
-        },
-        {
-            "creation_date": "2022-08-31",
-            "username": "ddd",
-            "comment": "ddd"
-        }
+      {
+        username: 'hamid',
+        creation_date: '2022-08-31',
+        comment: 'sas',
+      },
+      {
+        creation_date: '2022-08-31',
+        username: 'ddd',
+        comment: 'ddd',
+      },
     ],
   ),
 }));
