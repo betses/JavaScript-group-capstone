@@ -1,4 +1,3 @@
-
 class Movies {
   constructor() {
     this.movie = [];
@@ -25,7 +24,7 @@ class Movies {
   getMoviesCountNum = async () => {
     const result = await this.getMovie();
     return result.length;
-  }
+  };
 
   displayMovies = async () => {
     await this.getLikes();
@@ -37,7 +36,6 @@ class Movies {
       const movieNumber = addItem(count, movies);
       const card = document.createElement("div");
       card.classList.add("card");
-
       const movie = response[movies];
       const index = this.likes.findIndex((like) => like.item_id === movie.id);
       const msgLikes = index >= 0 ? this.likes[index].likes : 0;
@@ -57,9 +55,9 @@ class Movies {
       div.append(card);
       count += 1;
     }
-    const mainTitle = document.querySelector('.main-title');
+    const mainTitle = document.querySelector(".main-title");
     mainTitle.innerHTML = `Top ${count} Movies`;
-    const likeButtons = document.querySelectorAll('.fa-heart');
+    const likeButtons = document.querySelectorAll(".fa-heart");
     likeButtons.forEach((btn) => {
       btn.addEventListener(
         "click",
@@ -74,7 +72,6 @@ class Movies {
     });
     const comments = document.querySelectorAll(".btn");
     comments.forEach((comment) => {
-
       comment.addEventListener("click", async () => {
         const result = await this.popupDetails(comment.id);
         const main = document.querySelector("main");
@@ -175,6 +172,7 @@ class Movies {
         div2.append(hr);
         div.append(div2);
         commentss.append(div);
+        return dataa;
       });
     }
 
