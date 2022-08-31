@@ -5,7 +5,7 @@ class Movies {
   }
 
   getMovie = async () => {
-    const data = await fetch("https://api.tvmaze.com/shows");
+    const data = await fetch('https://api.tvmaze.com/shows');
     try {
       const response = await data.json();
       return response;
@@ -15,7 +15,7 @@ class Movies {
   };
 
   getLikes = async () => {
-    const likedList = await fetch("https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/g47Ybpe3Iv9MLdD87d0m/likes").then((response) => response.json());
+    const likedList = await fetch('https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/g47Ybpe3Iv9MLdD87d0m/likes').then((response) => response.json());
     this.likes = likedList;
   };
 
@@ -26,12 +26,12 @@ class Movies {
 
   displayMovies = async () => {
     await this.getLikes();
-    const div = document.querySelector(".grid-container");
+    const div = document.querySelector('.grid-container');
     const response = await this.getMovie();
     let count = 0;
-    for (let movies = 1; movies <= 20; movies += 1) {
-      const card = document.createElement("div");
-      card.classList.add("card");
+    for (let movies = 1; movies <= 40; movies += 1) {
+      const card = document.createElement('div');
+      card.classList.add('card');
       const movie = response[movies];
       const index = this.likes.findIndex((like) => like.item_id === movie.id);
       const msgLikes = index >= 0 ? this.likes[index].likes : 0;
@@ -51,27 +51,27 @@ class Movies {
       div.append(card);
       count += 1;
     }
-    const mainTitle = document.querySelector(".main-title");
+    const mainTitle = document.querySelector('.main-title');
     mainTitle.innerHTML = `Top ${count} Movies`;
-    const likeButtons = document.querySelectorAll(".fa-heart");
+    const likeButtons = document.querySelectorAll('.fa-heart');
     likeButtons.forEach((btn) => {
       btn.addEventListener(
-        "click",
+        'click',
         () => {
-          const movieId = parseInt(btn.getAttribute("data-pos"), 10);
+          const movieId = parseInt(btn.getAttribute('data-pos'), 10);
           this.addLike(movieId, btn);
           btn.disabled = true;
-          btn.style.color = "red";
+          btn.style.color = 'red';
         },
         { once: true },
       );
     });
-    const comments = document.querySelectorAll(".btn");
+    const comments = document.querySelectorAll('.btn');
     comments.forEach((comment) => {
-      comment.addEventListener("click", async () => {
+      comment.addEventListener('click', async () => {
         const result = await this.popupDetails(comment.id);
-        const main = document.querySelector("main");
-        main.style.filter = "blur(8px)";
+        const main = document.querySelector('main');
+        main.style.filter = 'blur(8px)';
         this.displayPopup(result);
         window.scroll({ top: 0, left: 0 });
       });
@@ -80,11 +80,11 @@ class Movies {
 
   addLike = async (itemId, likeButton) => {
     await fetch(
-      "https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/g47Ybpe3Iv9MLdD87d0m/likes",
+      'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/g47Ybpe3Iv9MLdD87d0m/likes',
       {
-        method: "POST",
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({ item_id: itemId }),
       },
@@ -109,9 +109,9 @@ class Movies {
   };
 
   displayPopup = async (response) => {
-    const body = document.querySelector("body");
-    const popup = document.createElement("div");
-    popup.classList.add("popup");
+    const body = document.querySelector('body');
+    const popup = document.createElement('div');
+    popup.classList.add('popup');
     const img = response.image.medium;
     popup.innerHTML = `
     <div class="close-btn-wrapper">
@@ -133,32 +133,32 @@ class Movies {
     </div>
     `;
     body.append(popup);
-    const close = document.querySelector(".close");
-    close.addEventListener("click", (e) => {
+    const close = document.querySelector('.close');
+    close.addEventListener('click', (e) => {
       e.preventDefault();
-      const body = document.querySelector("body");
-      const main = document.querySelector("main");
+      const body = document.querySelector('body');
+      const main = document.querySelector('main');
       body.removeChild(body.lastChild);
-      main.style.filter = "blur(0)";
+      main.style.filter = 'blur(0)';
     });
-    const url = "https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/g47Ybpe3Iv9MLdD87d0m/comments";
+    const url = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/g47Ybpe3Iv9MLdD87d0m/comments';
     const url2 = `https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/g47Ybpe3Iv9MLdD87d0m/comments?item_id=${response.id}`;
-    const commentss = document.getElementById("show");
+    const commentss = document.getElementById('show');
     const dataa = await fetch(url2).then((response) => response.json());
     if (dataa.length > 0) {
       dataa.map((data) => {
-        const div = document.createElement("div");
-        const div2 = document.createElement("div");
-        const username = document.createElement("p");
-        const comment = document.createElement("p");
-        const hr = document.createElement("hr");
-        const creationDate = document.createElement("p");
-        div.className = "items";
+        const div = document.createElement('div');
+        const div2 = document.createElement('div');
+        const username = document.createElement('p');
+        const comment = document.createElement('p');
+        const hr = document.createElement('hr');
+        const creationDate = document.createElement('p');
+        div.className = 'items';
         username.innerHTML = data.username;
-        username.className = "user";
-        creationDate.className = "item_id";
+        username.className = 'user';
+        creationDate.className = 'item_id';
         creationDate.innerHTML = data.creation_date;
-        comment.className = "comment";
+        comment.className = 'comment';
         comment.innerHTML = data.comment;
         div.append(creationDate);
         div2.append(username);
@@ -170,10 +170,11 @@ class Movies {
       });
     }
 
-    const form = document.getElementById("form");
-    form.addEventListener("submit", (e) => {
+    const form = document.getElementById('form');
+    form.addEventListener('submit', (e) => {
       e.preventDefault();
-
+      const username = document.getElementById('username');
+      const comment = document.getElementById('comment');
       const formData = new FormData(form);
       const payLoad = formData;
 
@@ -188,12 +189,12 @@ class Movies {
         comment: commentvalue,
       };
       fetch(url, {
-        method: "POST",
-        headers: { "Content-type": "application/json" },
+        method: 'POST',
+        headers: { 'Content-type': 'application/json' },
         body: JSON.stringify(payLoadObject),
       });
-      username.value = "";
-      comment.value = "";
+      username.value = '';
+      comment.value = '';
     });
   }
 

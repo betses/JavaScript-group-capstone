@@ -13,16 +13,11 @@
   "rules": {
     "no-shadow": "off",
     "no-param-reassign": "off",
-    "quotes": "off",
-    "no-const-assign": "off",
-    "no-undef": "off",
     "eol-last": "off",
     "import/extensions": [ 1, {
       "js": "always", "json": "always"
     }]
   },
-  "ignorePatterns": [
-    "dist/",
-    "build/"
-  ]
+  "ignorePatterns": ["dist/", "build/", "modules/luxon.js"]
+
 }
