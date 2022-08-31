@@ -196,7 +196,7 @@ class Movies {
       comment.value = "";
     });
   }
-  
+
   getComment = async (id) => {
     const data = await fetch(`https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/g47Ybpe3Iv9MLdD87d0m/comments?item_id=${id}`);
     try {
