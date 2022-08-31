@@ -200,6 +200,7 @@ footer p {
     gap: 10px;
 }
 
+
 .items {
     display: flex;
     flex-direction: row;
@@ -215,4 +216,9 @@ footer p {
 
 .user {
     margin-bottom: 1.5rem;
+
+.main-title {
+    color: white;
+    display: flex;
+    justify-content: center;
 }
