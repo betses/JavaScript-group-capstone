@@ -22,7 +22,6 @@ describe('comment counter tests using Jest', () => {
 
   test('test Comment Count ', async () => {
     const response = await movies.getComment(4);
-
     expect(response.length).toBe(2);
   });
 });
