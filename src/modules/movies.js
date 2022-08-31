@@ -56,6 +56,17 @@ class Movies {
         btn.style.color = 'red';
       }, { once: true });
     });
+    const comments = document.querySelectorAll('.btn');
+    comments.forEach((comment) => {
+      comment.addEventListener('click', (e) => {
+        e.preventDefault();
+        const main = document.querySelector('main');
+        main.style.filter = 'blur(8px)';
+        const result = this.popupDetails(e.target.dataset.id);
+        this.displayPopup(result);
+        window.scroll({ top: 0, left: 0 });
+      });
+    });
   }
 
   addLike = async (itemId, likeButton) => {
@@ -71,6 +82,49 @@ class Movies {
     const index = this.likes.findIndex((like) => like.item_id === itemId);
     const msgLikes = index >= 0 ? this.likes[index].likes : 0;
     likeButton.nextElementSibling.innerHTML = msgLikes;
+  }
+
+  popupDetails = async (id) => {
+    const data = await fetch(`https://api.tvmaze.com/shows/${id}`);
+    try {
+      const response = await data.json();
+      return this.displayPopup(response);
+    } catch (error) {
+      return error;
+    }
+  };
+
+  displayPopup = (response) => {
+    const body = document.querySelector('body');
+    const popup = document.createElement('div');
+    popup.classList.add('popup');
+    popup.innerHTML = `
+    <div class="close-btn-wrapper">
+    <span class="close">&times;</span>
+    </div>
+    <img src="${response.image.original}" alt="Avatar" class="popup-image" >
+    <div class="popup-wrapper">
+    <h2>${response.name}</h2>
+    <p class = "rating"><span>Imbd rating : ${response.rating.average}</span><span>Average Length: ${response.averageRuntime}min</span></p>
+    <p class = "info"><span>Genre(s) : ${response.genres}</span><br><span>Premiered: ${response.premiered}</span></p>
+    <h3>Comments(<span>0</span>)</h3>
+    <ul class="comments"></ul>
+    <h4>Add a comment</h4>
+    <form action="#" class="form">
+    <input type="text" placeholder="Your name">
+    <textarea name="comments"  class = "add-comment" placeholder="Comment"></textarea>
+    <button type="submit" class = "submit">Comment</button>
+    </form>
+    </div>
+    `;
+    body.append(popup);
+    const close = document.querySelector('.close');
+    close.addEventListener('click', () => {
+      const body = document.querySelector('body');
+      const main = document.querySelector('main');
+      body.removeChild(body.lastChild);
+      main.style.filter = 'blur(0)';
+    });
   }
 }
 
