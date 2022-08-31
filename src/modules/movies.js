@@ -141,7 +141,7 @@ class Movies {
     const commentss = document.getElementById("show");
     const dataa = await fetch(url2).then((response) => response.json());
     console.log(dataa);
-    if(dataa.length > 0) {
+    if (dataa.length > 0) {
       dataa.map((data) => {
         const div = document.createElement("div");
         const div2 = document.createElement("div");
