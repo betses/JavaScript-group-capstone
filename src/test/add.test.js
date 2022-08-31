@@ -6,19 +6,19 @@ global.fetch = jest.fn(() => Promise.resolve({
       {
         show: {
           id: 230,
-          url: "https://www.tvmaze.com/shows/230/go-on",
-          name: "Go On",
-          type: "Scripted",
-          language: "English",
+          url: 'https://www.tvmaze.com/shows/230/go-on',
+          name: 'Go On',
+          type: 'Scripted',
+          language: 'English',
         },
       },
       {
         show: {
           id: 228,
-          url: "https://www.tvmaze.com/shows/228/last-resort",
-          name: "Last Resort",
-          type: "Scripted",
-          language: "English",
+          url: 'https://www.tvmaze.com/shows/228/last-resort',
+          name: 'Last Resort',
+          type: 'Scripted',
+          language: 'English',
         },
       },
     ],
