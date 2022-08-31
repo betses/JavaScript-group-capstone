@@ -1,4 +1,3 @@
-
 class Movies {
   constructor() {
     this.movie = [];
@@ -33,11 +32,8 @@ class Movies {
     const response = await this.getMovie();
     let count = 0;
     for (let movies = 1; movies <= 20; movies += 1) {
-      const count = 0;
-      const movieNumber = addItem(count, movies);
       const card = document.createElement("div");
       card.classList.add("card");
-
       const movie = response[movies];
       const index = this.likes.findIndex((like) => like.item_id === movie.id);
       const msgLikes = index >= 0 ? this.likes[index].likes : 0;

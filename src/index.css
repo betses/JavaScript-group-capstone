@@ -207,6 +207,7 @@ footer p {
     margin-top: 0.5rem;
     gap: 2rem;
     font-weight: 400;
+    height: 90px;
 }
 
 .items div {
@@ -216,7 +217,10 @@ footer p {
 
 .user {
     margin-bottom: 1.5rem;
-
+}
+.items hr{
+    position: absolute;
+}
 .main-title {
     color: white;
     display: flex;
