@@ -227,3 +227,10 @@ footer p {
   display: flex;
   justify-content: center;
 }
+
+
+.main-title {
+    color: white;
+    display: flex;
+    justify-content: center;
+}
