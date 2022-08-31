@@ -15,7 +15,7 @@ class Movies {
   };
 
   getLikes = async () => {
-    const likedList = await fetch("https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/g47Ybpe3Iv9MLdD87d0m/likes",).then((response) => response.json());
+    const likedList = await fetch("https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/g47Ybpe3Iv9MLdD87d0m/likes").then((response) => response.json());
     this.likes = likedList;
   };
 
