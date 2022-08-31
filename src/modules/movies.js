@@ -145,7 +145,6 @@ class Movies {
     const url2 = `https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/g47Ybpe3Iv9MLdD87d0m/comments?item_id=${response.id}`;
     const commentss = document.getElementById("show");
     const dataa = await fetch(url2).then((response) => response.json());
-    console.log(dataa);
     if (dataa.length > 0) {
       dataa.map((data) => {
         const div = document.createElement("div");
