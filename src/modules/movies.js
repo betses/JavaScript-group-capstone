@@ -100,7 +100,6 @@ class Movies {
     const popup = document.createElement('div');
     popup.classList.add('popup');
     const img = response.image.medium;
-    console.log(response);
     popup.innerHTML = `
     <div class="close-btn-wrapper">
     <span class="close">&times;</span>
