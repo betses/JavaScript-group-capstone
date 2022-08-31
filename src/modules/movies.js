@@ -122,7 +122,7 @@ class Movies {
     <h2>${response.name}</h2>
     <p class = "rating"><span>Imbd rating : ${response.rating.average}</span><span>Average Length: ${response.averageRuntime}min</span></p>
     <p class = "info"><span>Genre(s) : ${response.genres}</span><br><span>Premiered: ${response.premiered}</span></p>
-    <h3 >Comments(<span>0</span>)</h3>
+    <h3 >Comments(<span>${await this.getCommentCountNum(response.id)}</span>)</h3>
     <ul id='show' class="comments"></ul>
     <h4>Add a comment</h4>
     <form id ='form' action="#" data-id=${response.id} class="form">
@@ -195,7 +195,24 @@ class Movies {
       username.value = "";
       comment.value = "";
     });
-  };
+  }
+
+  getComment = async (id) => {
+    const data = await fetch(`https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/g47Ybpe3Iv9MLdD87d0m/comments?item_id=${id}`);
+    try {
+      const response = await data.json();
+      return response;
+    } catch (error) {
+      return error;
+    }
+  }
+
+  getCommentCountNum = async (id) => {
+    const result = await this.getComment(id);
+    if (result.length > 0) {
+      return result.length;
+    } return 0;
+  }
 }
 
 export default Movies;
