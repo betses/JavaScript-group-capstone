@@ -1,8 +1,36 @@
-import addItem from '../modules/add.js';
+import Movies from '../modules/movies.js';
 
-describe('test items counter add function', () => {
-  test('test add 20 + 20', () => {
-    const sum = addItem(20, 30);
-    expect(sum).toBe(50);
+global.fetch = jest.fn(() => Promise.resolve({
+  json: () => Promise.resolve(
+    [
+      {
+        show: {
+          id: 230,
+          url: "https://www.tvmaze.com/shows/230/go-on",
+          name: "Go On",
+          type: "Scripted",
+          language: "English",
+        },
+      },
+      {
+        show: {
+          id: 228,
+          url: "https://www.tvmaze.com/shows/228/last-resort",
+          name: "Last Resort",
+          type: "Scripted",
+          language: "English",
+        },
+      },
+    ],
+  ),
+}));
+
+describe('items counter tests using Jest', () => {
+  const movies = new Movies();
+
+  test('test getMoviesCount I', async () => {
+    const response = await movies.getMovie();
+
+    expect(response.length).toBe(2);
   });
 });

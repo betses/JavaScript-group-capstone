@@ -1,7 +1,6 @@
-import addItem from './add.js';
-
 class Movies {
   constructor() {
+    this.movie = [];
     this.likes = [];
   }
 
@@ -20,13 +19,17 @@ class Movies {
     this.likes = likedList;
   }
 
+  getMoviesCountNum = async () => {
+    const result = await this.getMovie();
+    return result.length;
+  }
+
   displayMovies = async () => {
     await this.getLikes();
     const div = document.querySelector('.grid-container');
     const response = await this.getMovie();
+    let count = 0;
     for (let movies = 1; movies <= 20; movies += 1) {
-      const count = 0;
-      const movieNumber = addItem(count, movies);
       const card = document.createElement('div');
       card.classList.add('card');
       const movie = response[movies];
@@ -41,12 +44,15 @@ class Movies {
         </div>
       </div>
       <div class="title-container">
-        <h4><b>${movie.name} ${movieNumber}</b></h4> 
+        <h4><b>${movie.name}</b></h4> 
         <div class="like-icon"> <i class="fa fa-heart" data-pos=${movie.id}></i> <span id="movie-id"> ${msgLikes} </span> Like(s)</div>
       </div>
       `;
       div.append(card);
+      count += 1;
     }
+    const mainTitle = document.querySelector('.main-title');
+    mainTitle.innerHTML = `Top ${count} Movies`;
     const likeButtons = document.querySelectorAll('.fa-heart');
     likeButtons.forEach((btn) => {
       btn.addEventListener('click', () => {
@@ -58,11 +64,11 @@ class Movies {
     });
     const comments = document.querySelectorAll('.btn');
     comments.forEach((comment) => {
-      comment.addEventListener('click', (e) => {
+      comment.addEventListener('click', async (e) => {
         e.preventDefault();
         const main = document.querySelector('main');
         main.style.filter = 'blur(8px)';
-        const result = this.popupDetails(e.target.dataset.id);
+        const result = await this.popupDetails(e.target.dataset.id);
         this.displayPopup(result);
         window.scroll({ top: 0, left: 0 });
       });
@@ -88,7 +94,7 @@ class Movies {
     const data = await fetch(`https://api.tvmaze.com/shows/${id}`);
     try {
       const response = await data.json();
-      return this.displayPopup(response);
+      return response;
     } catch (error) {
       return error;
     }
@@ -98,11 +104,12 @@ class Movies {
     const body = document.querySelector('body');
     const popup = document.createElement('div');
     popup.classList.add('popup');
+    const img = response.image.medium;
     popup.innerHTML = `
     <div class="close-btn-wrapper">
     <span class="close">&times;</span>
     </div>
-    <img src="${response.image.original}" alt="Avatar" class="popup-image" >
+    <img src="${img}" alt="Avatar" class="popup-image" >
     <div class="popup-wrapper">
     <h2>${response.name}</h2>
     <p class = "rating"><span>Imbd rating : ${response.rating.average}</span><span>Average Length: ${response.averageRuntime}min</span></p>

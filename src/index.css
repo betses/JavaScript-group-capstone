@@ -181,3 +181,9 @@ footer p {
     flex-direction: column;
     gap: 10px;
 }
+
+.main-title {
+    color: white;
+    display: flex;
+    justify-content: center;
+}
