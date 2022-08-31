@@ -130,3 +130,54 @@ footer p {
     width: 80px;
     border: 1px solid white;
 }
+
+.popup {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 95%;
+    overflow: auto;
+    margin-top: 40px;
+}
+
+.popup-image {
+    opacity: 1;
+    display: block;
+    width: 40%;
+    height: 500px;
+    border-radius: 10px;
+    transition: 0.5s ease;
+    backface-visibility: hidden;
+}
+
+.popup-wrapper {
+    background-color: wheat;
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.close {
+    color: white;
+    font-size: 60px;
+    cursor: pointer;
+}
+
+.close-btn-wrapper {
+    display: flex;
+    justify-content: end;
+    width: 39%;
+}
+
+.form {
+    margin: 10px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
