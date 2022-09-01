@@ -108,11 +108,43 @@ class Movies {
     }
   };
 
+  getComment = async (id) => {
+    const data = await fetch(`https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/g47Ybpe3Iv9MLdD87d0m/comments?item_id=${id}`);
+    const response = data.json();
+    return response;
+  }
+
+  getCommentCountNum = async (id) => {
+    const result = await this.getComment(id);
+    if (result.length > 0) {
+      return result.length;
+    } return 0;
+  }
+
+  displayComment = async (response) => {
+    const commentss = document.getElementById('show');
+    const counter = document.getElementById('counter-count');
+    commentss.innerHTML = '';
+    const dataa = await this.getComment(response);
+    counter.innerHTML = await this.getCommentCountNum(response);
+    if (dataa.length > 0) {
+      await dataa.forEach((data) => {
+        commentss.innerHTML += `
+        <li>
+            <small>${data.creation_date}</small>
+            <small>${data.username}</small>
+            <small>${data.comment}</small>
+        </li>
+      `;
+      });
+    }
+  }
+
   displayPopup = async (response) => {
     const body = document.querySelector('body');
     const popup = document.createElement('div');
     popup.classList.add('popup');
-    const img = response.image.medium;
+    const img = response.image.original;
     popup.innerHTML = `
     <div class="close-btn-wrapper">
     <span class="close">&times;</span>
@@ -122,7 +154,7 @@ class Movies {
     <h2>${response.name}</h2>
     <p class = "rating"><span>Imbd rating : ${response.rating.average}</span><span>Average Length: ${response.averageRuntime}min</span></p>
     <p class = "info"><span>Genre(s) : ${response.genres}</span><br><span>Premiered: ${response.premiered}</span></p>
-    <h3 >Comments(<span>${await this.getCommentCountNum(response.id)}</span>)</h3>
+    <h3 >Comments(<span id="counter-count">${await this.getCommentCountNum(response.id)}</span>)</h3>
     <ul id='show' class="comments"></ul>
     <h4>Add a comment</h4>
     <form id ='form' action="#" data-id=${response.id} class="form">
@@ -141,37 +173,14 @@ class Movies {
       body.removeChild(body.lastChild);
       main.style.filter = 'blur(0)';
     });
-    const url = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/g47Ybpe3Iv9MLdD87d0m/comments';
-    const url2 = `https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/g47Ybpe3Iv9MLdD87d0m/comments?item_id=${response.id}`;
-    const commentss = document.getElementById('show');
-    const dataa = await fetch(url2).then((response) => response.json());
-    if (dataa.length > 0) {
-      dataa.map((data) => {
-        const div = document.createElement('div');
-        const div2 = document.createElement('div');
-        const username = document.createElement('p');
-        const comment = document.createElement('p');
-        const hr = document.createElement('hr');
-        const creationDate = document.createElement('p');
-        div.className = 'items';
-        username.innerHTML = data.username;
-        username.className = 'user';
-        creationDate.className = 'item_id';
-        creationDate.innerHTML = data.creation_date;
-        comment.className = 'comment';
-        comment.innerHTML = data.comment;
-        div.append(creationDate);
-        div2.append(username);
-        div2.append(comment);
-        div2.append(hr);
-        div.append(div2);
-        commentss.append(div);
-        return dataa;
-      });
-    }
+    this.displayComment(response.id);
+    this.submitForm(response.id);
+  }
 
+  submitForm = async (response) => {
+    const url = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/g47Ybpe3Iv9MLdD87d0m/comments';
     const form = document.getElementById('form');
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
       const username = document.getElementById('username');
       const comment = document.getElementById('comment');
@@ -188,31 +197,15 @@ class Movies {
         username: userNamevalue,
         comment: commentvalue,
       };
-      fetch(url, {
+      await fetch(url, {
         method: 'POST',
         headers: { 'Content-type': 'application/json' },
         body: JSON.stringify(payLoadObject),
       });
       username.value = '';
       comment.value = '';
+      this.displayComment(response);
     });
-  }
-
-  getComment = async (id) => {
-    const data = await fetch(`https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/g47Ybpe3Iv9MLdD87d0m/comments?item_id=${id}`);
-    try {
-      const response = await data.json();
-      return response;
-    } catch (error) {
-      return error;
-    }
-  }
-
-  getCommentCountNum = async (id) => {
-    const result = await this.getComment(id);
-    if (result.length > 0) {
-      return result.length;
-    } return 0;
   }
 }
 
