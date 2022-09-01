@@ -29,7 +29,7 @@ class Movies {
     const div = document.querySelector('.grid-container');
     const response = await this.getMovie();
     let count = 0;
-    for (let movies = 1; movies <= 40; movies += 1) {
+    for (let movies = 20; movies < 40; movies += 1) {
       const card = document.createElement('div');
       card.classList.add('card');
       const movie = response[movies];

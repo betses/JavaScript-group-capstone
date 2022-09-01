@@ -13,6 +13,13 @@ body {
   color: white;
 }
 
+.nav-bar h2 {
+  background: -webkit-linear-gradient(#eee, #f00);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transform: scaleY(2) scaleX(2);
+}
+
 .nav-bar ul {
   display: flex;
   list-style: none;
