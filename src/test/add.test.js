@@ -29,8 +29,8 @@ describe('items counter tests using Jest', () => {
   const movies = new Movies();
 
   test('test getMoviesCount I', async () => {
-    const response = await movies.getMovie();
+    const response = await movies.getMoviesCountNum();
 
-    expect(response.length).toBe(2);
+    expect(response).toBe(2);
   });
 });
