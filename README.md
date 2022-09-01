@@ -6,7 +6,7 @@
 
 ### Click on picture to watch a description about the project:
 
-[![Watch the video](https://github.com/betses/JavaScript-group-capstone/asset/screenshot.png)](https://drive.google.com/file/d/118uYefji9VuAos0wH7DN1pxVKKuUE1Ib/view?usp=sharing)
+[![Watch the video](https://github.com/betses/JavaScript-group-capstone/blob/development/assets/screenshot.PNG)](https://drive.google.com/file/d/118uYefji9VuAos0wH7DN1pxVKKuUE1Ib/view?usp=sharing)
 
 
 ## Built With
